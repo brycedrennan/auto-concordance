@@ -42,7 +42,6 @@ setup(
     package_data={"auto_concordance": []},
     install_requires=[
         "numpy",
-        "tensorflow",
     ],
     # don't specify maximum python versions as it can cause very long dependency resolution issues as the resolver
     # goes back to older versions of packages that didn't specify a maximum

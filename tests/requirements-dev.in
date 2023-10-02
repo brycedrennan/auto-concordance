@@ -6,5 +6,3 @@ pytest-randomly
 pytest-sugar
 ruff
 wheel
-
--e .

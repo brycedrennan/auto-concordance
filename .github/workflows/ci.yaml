@@ -20,13 +20,13 @@ jobs:
         id: cache
         with:
           path: ${{ env.pythonLocation }}
-          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements-dev.txt') }}-lint
+          key: ${{ env.pythonLocation }}-${{ hashFiles('tests/requirements-dev.txt') }}-lint
       - name: Install Ruff
         if: steps.cache.outputs.cache-hit != 'true'
-        run: grep -E 'ruff==' requirements-dev.txt | xargs pip install
+        run: grep -E 'ruff==' tests/requirements-dev.txt | xargs pip install
       - name: Lint
         run: |
-          echo "::add-matcher::.github/lint_matcher.json"
+          echo "::add-matcher::.github/workflows/lint_matcher.json"
           ruff --config tests/ruff.toml .
   autoformat:
     runs-on: ubuntu-latest
@@ -40,10 +40,10 @@ jobs:
         id: cache
         with:
           path: ${{ env.pythonLocation }}
-          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements-dev.txt') }}-autoformat
+          key: ${{ env.pythonLocation }}-${{ hashFiles('tests/requirements-dev.txt') }}-autoformat
       - name: Install Black
         if: steps.cache.outputs.cache-hit != 'true'
-        run: grep -E 'black==' requirements-dev.txt | xargs pip install
+        run: grep -E 'black==' tests/requirements-dev.txt | xargs pip install
       - name: Lint
         run: |
           black --diff --fast .
